@@ -300,4 +300,16 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-05 — First deployment to GitHub
+
+**What was done:**
+- Initialized git repository and created initial commit
+- Added `.gitignore` for OS/editor files and future `node_modules`
+- Added remote `origin` → https://github.com/moiseev1991-stack/lucky-15-bet-calculator.git
+- Pushed `main` branch to GitHub (59 files)
+
+**Files affected:** `.gitignore` (new), `.git/` (new repository)
+
+---
+
 _Add new entries above this line, most recent first._
