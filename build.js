@@ -43,7 +43,6 @@ function buildPage(p) {
   <title>${p.title}</title>
   <meta name="description" content="${p.metaDesc}">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://www.betcalcuk.com/calculators/${p.file}">
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body class="page-wrapper" data-bet-type="${p.betType}">

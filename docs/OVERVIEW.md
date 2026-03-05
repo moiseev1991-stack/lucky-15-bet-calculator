@@ -300,6 +300,20 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-05 — Removed canonical links from all pages
+
+**What was done:**
+- Removed `<link rel="canonical">` pointing to `https://www.betcalcuk.com/` from all HTML pages
+- Canonical tag was non-canonical (wrong domain) and caused SEO errors on lucky-15-bet-calculator.uk
+- Updated `build.js` and `generate-calc-pages.ps1` so future generated pages no longer include canonical
+
+**How it works:**
+- Pages are now without a canonical tag; search engines will treat each page URL as canonical
+
+**Files affected:** `index.html`, `about.html`, `bookmakers.html`, all `calculators/*.html`, all `guides/*.html`, `build.js`, `generate-calc-pages.ps1` (modified)
+
+---
+
 ### 2026-03-05 — First deployment to GitHub
 
 **What was done:**
