@@ -219,13 +219,13 @@ All significant changes made to this project are recorded below. Most recent fir
 - Created `gate/index.html` — gate page with Crazy Time stats embed and instant redirect to tracker URL
 - Redirect script reads `bk` query param (bookmaker id) and appends to tracker URL for attribution
 - Meta `noindex, nofollow` and meta refresh fallback for no-JS
-- Updated all Claim Offer / View Offer links across site to `/gate/?bk={id}` instead of `#` or anchor
+- Updated all Claim Offer / View Offer links across site to `/gate/` (one common link for all bookmakers)
 - Bookmakers: bet365, betfred, paddypower, coral, williamhill, skybet, ladbrokes, betfair
 - Updated `index.html`, `bookmakers.html`, `build.js`, `generate-calc-pages.ps1`, all 29 calculator pages
 
 **How it works:**
-- User clicks Claim Offer → `/gate/?bk=bet365` → instant redirect to `https://TRACKER_URL_HERE?bk=bet365`
-- Replace `https://TRACKER_URL_HERE` in gate/index.html with actual tracker URL
+- User clicks Claim Offer → `/gate/` → instant redirect to tracker URL (same for all bookmakers)
+- Replace `https://YOUR_TRACKER_URL` in gate/index.html with actual tracker URL
 
 **Files affected:** `gate/index.html` (new), `index.html`, `bookmakers.html`, `build.js`, `generate-calc-pages.ps1`, `calculators/*.html` (modified)
 
