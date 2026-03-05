@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /build.js
+Disallow: /generate-calc-pages.ps1
+Disallow: /js/generate-pages.js
+
+Sitemap: https://www.betcalcuk.com/sitemap.xml

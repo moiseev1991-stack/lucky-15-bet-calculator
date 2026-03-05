@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#1a3a6b"/>
+  <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="6.5" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  <!-- Calculator body -->
+  <rect x="4" y="2" width="24" height="28" rx="5"
+    fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.25)" stroke-width="1.2"/>
+  <!-- Screen -->
+  <rect x="6.5" y="4.5" width="19" height="8.5" rx="2.5" fill="rgba(255,255,255,0.14)"/>
+  <!-- Screen lines -->
+  <rect x="8.5" y="6.5" width="9" height="2" rx="1" fill="rgba(255,255,255,0.5)"/>
+  <rect x="13" y="9.5" width="9" height="2" rx="1" fill="#f5a623" opacity="0.9"/>
+  <!-- Separator -->
+  <line x1="6.5" y1="15.5" x2="25.5" y2="15.5" stroke="rgba(255,255,255,0.14)" stroke-width="0.8"/>
+  <!-- Buttons 3×2 -->
+  <rect x="6.5" y="17"   width="5" height="4" rx="1.5" fill="rgba(255,255,255,0.25)"/>
+  <rect x="13.5" y="17"  width="5" height="4" rx="1.5" fill="rgba(255,255,255,0.25)"/>
+  <rect x="20.5" y="17"  width="5" height="4" rx="1.5" fill="#f5a623"/>
+  <rect x="6.5" y="22.5" width="5" height="4" rx="1.5" fill="rgba(255,255,255,0.25)"/>
+  <rect x="13.5" y="22.5" width="5" height="4" rx="1.5" fill="rgba(255,255,255,0.25)"/>
+  <rect x="20.5" y="22.5" width="5" height="4" rx="1.5" fill="rgba(255,255,255,0.25)"/>
+</svg>

@@ -1,0 +1,1451 @@
+/* ============================================================
+   BetCalc UK — Main Stylesheet
+   Modern, mobile-first redesign
+   ============================================================ */
+
+/* ── Google Font (Inter) ────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  --primary:        #1a3a6b;
+  --primary-mid:    #1a5ca8;
+  --primary-light:  #e8f2fc;
+  --primary-glow:   rgba(26,92,168,.18);
+  --accent:         #f5a623;
+  --accent-dark:    #d4891a;
+  --accent-light:   #fff8e7;
+  --success:        #16a34a;
+  --success-bg:     #dcfce7;
+  --danger:         #dc2626;
+  --danger-bg:      #fee2e2;
+  --text:           #111827;
+  --text-muted:     #6b7280;
+  --border:         #e5e7eb;
+  --border-focus:   #1a5ca8;
+  --bg:             #f0f4f9;
+  --bg-alt:         #f8fafc;
+  --white:          #ffffff;
+  --card-shadow:    0 4px 20px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.05);
+  --card-shadow-lg: 0 8px 32px rgba(0,0,0,.12), 0 2px 8px rgba(0,0,0,.06);
+  --radius:         12px;
+  --radius-sm:      8px;
+  --radius-xs:      4px;
+  --transition:     .18s ease;
+  --header-h:       64px;
+}
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+a { color: var(--primary-mid); text-decoration: none; }
+a:hover { text-decoration: underline; color: var(--primary); }
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1,h2,h3,h4,h5,h6 { line-height: 1.25; font-weight: 700; }
+h1 { font-size: clamp(1.4rem, 3.5vw, 2.2rem); }
+h2 { font-size: clamp(1.15rem, 2.5vw, 1.6rem); }
+h3 { font-size: 1.1rem; }
+
+p { margin-bottom: 1rem; }
+ul, ol { padding-left: 1.4rem; margin-bottom: 1rem; }
+li { margin-bottom: .35rem; }
+
+/* ── Layout ────────────────────────────────────────────────── */
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.page-wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+main { flex: 1; }
+
+/* ── Header ────────────────────────────────────────────────── */
+.site-header {
+  background: linear-gradient(90deg, #0f1f3d 0%, #1a3a6b 60%, #1a5ca8 100%);
+  color: var(--white);
+  box-shadow: 0 2px 0 rgba(245,166,35,.25), 0 4px 16px rgba(0,0,0,.25);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--header-h);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  max-width: 1140px;
+  margin: 0 auto;
+  height: 100%;
+  gap: 16px;
+}
+
+/* Logo */
+.site-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.site-logo svg { width: 34px; height: 34px; flex-shrink: 0; }
+.logo-text {
+  font-size: 1.22rem;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1;
+  color: var(--white);
+}
+.logo-text span { color: var(--accent); }
+
+/* ── Desktop Nav ────────────────────────────────────────────── */
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.site-nav > a,
+.nav-calc-btn {
+  color: rgba(255,255,255,.88);
+  padding: 7px 13px;
+  border-radius: 20px;
+  font-size: .88rem;
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+  white-space: nowrap;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  line-height: 1.4;
+}
+
+.site-nav > a:hover,
+.site-nav > a.active,
+.nav-calc-btn:hover,
+.nav-calc-btn.active {
+  background: rgba(255,255,255,.15);
+  color: var(--white);
+  text-decoration: none;
+}
+
+/* Calculators dropdown wrapper */
+.nav-calc-wrap {
+  position: relative;
+}
+
+.nav-chevron {
+  width: 10px;
+  height: 7px;
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+.nav-calc-btn[aria-expanded="true"] .nav-chevron,
+.nav-calc-btn.dd-open .nav-chevron {
+  transform: rotate(180deg);
+}
+
+/* Dropdown panel */
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%; /* No gap — gap was causing mouseleave to fire on mouse transit */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow-lg);
+  padding: 20px;
+  min-width: 700px;
+  z-index: 300;
+  /* Push content visually down with a transparent top zone to bridge any gap */
+  margin-top: 4px;
+}
+
+/* Dropdown shown only when .open class is set (click-based, no hover) */
+.nav-dropdown.open { display: block; animation: ddFadeIn .15s ease both; }
+
+@keyframes ddFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.nav-dd-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px 12px;
+}
+
+.nav-dd-group-label {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+  padding: 0 6px 6px;
+  border-bottom: 1.5px solid var(--border);
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.nav-dd-link {
+  display: block;
+  padding: 5px 8px;
+  border-radius: var(--radius-xs);
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition);
+}
+.nav-dd-link:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: 1.5px solid rgba(255,255,255,.25);
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  cursor: pointer;
+  padding: 6px 8px;
+  flex-shrink: 0;
+}
+.hamburger svg { width: 22px; height: 22px; display: block; }
+
+/* ── Mobile nav ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hamburger { display: flex; align-items: center; }
+
+  .site-nav {
+    display: none;
+    position: absolute;
+    top: var(--header-h);
+    left: 0; right: 0;
+    background: #0f1f3d;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 12px 16px;
+    gap: 2px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    max-height: calc(100vh - var(--header-h));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .site-nav.open { display: flex; }
+
+  .site-nav > a {
+    padding: 12px 14px;
+    font-size: .95rem;
+    border-radius: var(--radius-sm);
+    color: rgba(255,255,255,.85);
+  }
+  .site-nav > a.active { background: rgba(255,255,255,.12); color: var(--white); }
+
+  /* Mobile calculators section */
+  .mob-calc-section { display: flex; flex-direction: column; }
+  .mob-calc-section-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,.85);
+    font-size: .95rem;
+    font-weight: 500;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-align: left;
+  }
+  .mob-calc-section-btn.active,
+  .mob-calc-section-btn:hover { background: rgba(255,255,255,.12); color: var(--white); }
+  .mob-calc-section-btn .nav-chevron { margin-left: auto; }
+  .mob-calc-section-btn[aria-expanded="true"] .nav-chevron { transform: rotate(180deg); }
+
+  .mob-calc-accordion { display: none; padding-left: 8px; border-left: 2px solid rgba(255,255,255,.1); margin: 4px 0 4px 14px; }
+  .mob-calc-accordion.open { display: block; }
+
+  .mob-calc-group { margin-bottom: 4px; }
+  .mob-calc-group-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,.65);
+    font-size: .8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    padding: 8px 10px 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-align: left;
+  }
+  .mob-calc-group-btn .nav-chevron { margin-left: auto; width: 9px; height: 6px; }
+  .mob-calc-group-btn[aria-expanded="true"] .nav-chevron { transform: rotate(180deg); }
+
+  .mob-calc-links { display: none; }
+  .mob-calc-links.open { display: flex; flex-direction: column; gap: 2px; padding-bottom: 6px; }
+
+  .mob-calc-link {
+    display: block;
+    color: rgba(255,255,255,.8);
+    font-size: .88rem;
+    padding: 8px 12px;
+    border-radius: var(--radius-xs);
+    transition: background var(--transition);
+  }
+  .mob-calc-link:hover { background: rgba(255,255,255,.1); text-decoration: none; color: var(--white); }
+}
+
+/* ── Hero / Page Title ─────────────────────────────────────── */
+.page-hero {
+  background: linear-gradient(135deg, #0f1f3d 0%, #1a3a6b 50%, #1a5ca8 100%);
+  color: var(--white);
+  padding: 48px 20px 44px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(245,166,35,.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,.05) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.page-hero h1 {
+  color: var(--white);
+  margin-bottom: .6rem;
+  position: relative;
+  text-shadow: 0 2px 12px rgba(0,0,0,.3);
+}
+
+.page-hero h1::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin: 10px auto 0;
+}
+
+.page-hero p {
+  color: rgba(255,255,255,.82);
+  max-width: 620px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  position: relative;
+}
+
+/* ── Hero enhanced (infographic layout) ────────────────────── */
+.page-hero.hero-enhanced {
+  padding: 40px 20px 38px;
+  text-align: left;
+}
+
+.hero-layout {
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-enhanced .hero-text h1::after {
+  margin: 10px 0 0; /* left-align underline */
+}
+
+.hero-enhanced .hero-text p {
+  margin: 0;
+  max-width: 520px;
+}
+
+/* Hero quick-stats row */
+.hero-stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hero-stat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.9);
+  white-space: nowrap;
+}
+
+.hero-stat-chip-icon {
+  font-size: .85rem;
+  line-height: 1;
+}
+
+.hero-stat-chip-accent {
+  background: rgba(245,166,35,.15);
+  border-color: rgba(245,166,35,.4);
+  color: #f5c842;
+}
+
+/* Right-side visual panel */
+.hero-visual {
+  flex-shrink: 0;
+  width: 300px;
+  position: relative;
+}
+
+.hero-visual-inner {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main calculator illustration */
+.hero-calc-svg {
+  width: 168px;
+  height: auto;
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,.4)) drop-shadow(0 2px 8px rgba(0,0,0,.2));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-calc-svg {
+    animation: calcFloat 5s ease-in-out infinite;
+  }
+  @keyframes calcFloat {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50%       { transform: translateY(-10px) rotate(1deg); }
+  }
+}
+
+/* Floating info badges around the calculator */
+.hero-float-badge {
+  position: absolute;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.22);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 10px;
+  padding: 7px 13px;
+  color: var(--white);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hero-float-badge strong {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hero-float-badge span {
+  font-size: .68rem;
+  color: rgba(255,255,255,.75);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.hero-float-badge--1 { top: -12px;  right: -26px; }
+.hero-float-badge--2 { top: 50%;    right: -32px; transform: translateY(-50%); }
+.hero-float-badge--3 { bottom: -12px; left: -26px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-float-badge--1 { animation: badgeFloat1 5s  ease-in-out infinite; }
+  .hero-float-badge--2 { animation: badgeFloat2 6s  ease-in-out infinite; }
+  .hero-float-badge--3 { animation: badgeFloat3 4.5s ease-in-out infinite; }
+  @keyframes badgeFloat1 {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50%       { transform: translateY(-6px) rotate(1deg); }
+  }
+  @keyframes badgeFloat2 {
+    0%, 100% { transform: translateY(-50%) rotate(1deg); }
+    50%       { transform: translateY(calc(-50% + 6px)) rotate(-1deg); }
+  }
+  @keyframes badgeFloat3 {
+    0%, 100% { transform: translateY(0) rotate(1deg); }
+    50%       { transform: translateY(-5px) rotate(-1deg); }
+  }
+}
+
+/* Sports panel — primary hero visual */
+.hero-sports-panel {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 16px;
+  padding: 14px 13px 12px;
+}
+
+.hero-sports-panel-label {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.hero-sport-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.hero-sport-card {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 8px;
+  padding: 7px 10px;
+  transition: background .18s;
+}
+
+.hero-sport-card:hover {
+  background: rgba(255,255,255,.13);
+}
+
+.hero-sport-card svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.hero-sport-card span {
+  font-size: .72rem;
+  color: rgba(255,255,255,.85);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── Mobile: stack layout ──────────────────────────────────── */
+@media (max-width: 860px) {
+  .page-hero.hero-enhanced {
+    text-align: center;
+    padding: 36px 20px 32px;
+  }
+  .hero-layout {
+    flex-direction: column;
+    gap: 28px;
+  }
+  .hero-enhanced .hero-text h1::after {
+    margin: 10px auto 0;
+  }
+  .hero-enhanced .hero-text p {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  .hero-stats-row {
+    justify-content: center;
+  }
+  .hero-visual {
+    width: 280px;
+  }
+  .hero-float-badge--1 { top: -8px; right: -12px; }
+  .hero-float-badge--2 { right: -14px; }
+  .hero-float-badge--3 { bottom: -8px; left: -12px; }
+}
+
+/* ── Breadcrumb ────────────────────────────────────────────── */
+.breadcrumb {
+  background: #f4f6f9;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  font-size: .82rem;
+  color: var(--text-muted);
+}
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; padding: 0; margin: 0; }
+.breadcrumb li { display: flex; align-items: center; gap: 4px; }
+.breadcrumb li:not(:last-child)::after { content: '›'; color: #bbc4d0; }
+.breadcrumb a { color: var(--primary-mid); text-decoration: none; }
+.breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.04);
+}
+
+.card-header {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-mid) 100%);
+  color: var(--white);
+  padding: 14px 22px;
+  font-size: .95rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-bottom: 3px solid var(--accent);
+}
+
+.card-body { padding: 22px; }
+
+/* ── Calculator Card ───────────────────────────────────────── */
+.calc-card {
+  max-width: 880px;
+  margin: 0 auto;
+  border-top: 4px solid var(--accent);
+}
+
+.calc-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 20px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 540px) {
+  .calc-form-row { grid-template-columns: 1fr; }
+}
+
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+
+.form-label {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.form-select, .form-input {
+  height: 42px;
+  padding: 0 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: .93rem;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--white);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  width: 100%;
+}
+.form-select:focus, .form-input:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+}
+.form-select:hover, .form-input:hover {
+  border-color: #b0b8c5;
+}
+
+/* Odds format tabs */
+.odds-format-tabs {
+  display: flex;
+  gap: 3px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  height: 42px;
+  align-items: center;
+}
+.odds-format-tabs button {
+  flex: 1;
+  height: 100%;
+  padding: 0 8px;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-size: .82rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+.odds-format-tabs button.active {
+  background: var(--primary-mid);
+  color: var(--white);
+  box-shadow: 0 2px 6px rgba(26,92,168,.3);
+}
+.odds-format-tabs button:hover:not(.active) {
+  background: rgba(0,0,0,.05);
+  color: var(--text);
+}
+
+/* ── Selection rows ────────────────────────────────────────── */
+.selections-header {
+  display: grid;
+  grid-template-columns: 32px 1fr 200px 90px;
+  gap: 8px;
+  padding: 6px 4px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 6px;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+}
+
+.selection-row {
+  display: grid;
+  grid-template-columns: 32px 1fr 200px 90px auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--bg);
+  border-radius: var(--radius-xs);
+  transition: background var(--transition);
+}
+.selection-row:hover { background: var(--bg-alt); }
+.selection-row:last-child { border-bottom: none; }
+
+.sel-number {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--primary-mid), var(--primary));
+  color: var(--white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(26,92,168,.25);
+}
+
+.odds-fractional {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.odds-fractional .form-input {
+  width: 62px;
+  text-align: center;
+  padding: 0 6px;
+}
+.odds-sep { font-size: 1.1rem; font-weight: 600; color: var(--text-muted); }
+
+@media (max-width: 600px) {
+  .selections-header { display: none; }
+  .selection-row {
+    grid-template-columns: 32px 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 6px;
+    padding: 10px 4px;
+  }
+  .sel-number { grid-row: span 2; align-self: start; margin-top: 4px; }
+  .sel-outcome, .sel-odds, .sel-rule4, .sel-dh { grid-column: 2; }
+  .form-select, .form-input { min-height: 44px; }
+}
+
+/* ── Results panel ─────────────────────────────────────────── */
+.results-panel {
+  background: linear-gradient(135deg, #edf4ff 0%, #f0f7ff 100%);
+  border: 1.5px solid #b8d4f5;
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-top: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.results-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  text-align: center;
+}
+
+.result-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 8px;
+  background: rgba(255,255,255,.7);
+  border-radius: var(--radius-sm);
+  backdrop-filter: blur(4px);
+}
+.result-label {
+  font-size: .7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--text-muted);
+}
+.result-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+}
+.profit-positive { color: var(--success); }
+.profit-negative { color: var(--danger); }
+
+@media (max-width: 400px) {
+  .results-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Stake section ─────────────────────────────────────────── */
+.bet-count-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1.5px solid var(--border);
+  margin-bottom: 14px;
+  font-size: .88rem;
+  color: var(--text-muted);
+}
+.bet-count-row strong { color: var(--text); }
+
+.stake-section {
+  border-top: 2px solid var(--bg);
+  padding-top: 18px;
+  margin-top: 14px;
+}
+.stake-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.stake-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 140px;
+}
+.stake-prefix {
+  position: absolute;
+  left: 13px; top: 50%; transform: translateY(-50%);
+  color: var(--text-muted);
+  font-weight: 700;
+  pointer-events: none;
+  font-size: .95rem;
+}
+.stake-input-wrap .form-input { padding-left: 28px; }
+
+/* ── Bookmaker Bonuses ─────────────────────────────────────── */
+.bonuses-section {
+  border-top: 2px dashed var(--border);
+  padding-top: 16px;
+  margin-top: 18px;
+}
+.bonuses-section summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--primary-mid);
+  margin-bottom: 12px;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.bonuses-section summary::-webkit-details-marker { display: none; }
+.bonuses-section summary::before {
+  content: '▸';
+  transition: transform var(--transition);
+}
+details[open] .bonuses-section summary::before,
+.bonuses-section details[open] > summary::before { transform: rotate(90deg); }
+
+.bonuses-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 480px) { .bonuses-grid { grid-template-columns: 1fr; } }
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: .88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: background var(--transition), transform .1s, box-shadow var(--transition);
+  text-decoration: none;
+  line-height: 1;
+}
+.btn:active { transform: scale(.97); }
+.btn:hover { text-decoration: none; }
+
+.btn-primary { background: var(--primary-mid); color: var(--white); box-shadow: 0 2px 8px rgba(26,92,168,.2); }
+.btn-primary:hover { background: var(--primary); color: var(--white); box-shadow: 0 4px 14px rgba(26,92,168,.3); }
+
+.btn-outline {
+  background: none;
+  border: 1.5px solid var(--border);
+  color: var(--text-muted);
+}
+.btn-outline:hover { border-color: var(--danger); color: var(--danger); background: var(--danger-bg); }
+
+.btn-accent { background: var(--accent); color: var(--white); box-shadow: 0 2px 8px rgba(245,166,35,.2); }
+.btn-accent:hover { background: var(--accent-dark); color: var(--white); box-shadow: 0 4px 14px rgba(245,166,35,.3); }
+
+.btn-sm { padding: 7px 14px; font-size: .8rem; }
+.btn-lg { padding: 13px 28px; font-size: 1rem; }
+.btn-full { width: 100%; }
+
+/* ── EW badge ───────────────────────────────────────────────── */
+.ew-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #e0f2fe;
+  border: 1px solid #7dd3fc;
+  color: #0369a1;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+/* ── Bookmakers grid ───────────────────────────────────────── */
+.bookmakers-section { margin-top: 44px; }
+.bookmakers-section h2 { margin-bottom: 6px; }
+.bookmakers-section .section-intro { color: var(--text-muted); margin-bottom: 20px; font-size: .95rem; }
+
+.bookmakers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.bookie-card {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
+}
+.bookie-card:hover {
+  box-shadow: var(--card-shadow-lg);
+  border-color: var(--primary-mid);
+  transform: translateY(-2px);
+}
+
+.bookie-header { display: flex; align-items: center; gap: 12px; }
+.bookie-logo {
+  width: 54px; height: 38px;
+  border-radius: var(--radius-xs);
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .68rem;
+  font-weight: 800;
+  color: var(--primary);
+  letter-spacing: .02em;
+  flex-shrink: 0;
+  border: 1.5px solid var(--border);
+  text-align: center;
+  padding: 2px;
+  overflow: hidden;
+}
+.bookie-logo img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: calc(var(--radius-xs) - 1px);
+}
+.bookie-name { font-weight: 700; font-size: 1rem; }
+.bookie-rating { display: flex; gap: 2px; color: var(--accent); font-size: .85rem; }
+
+.bookie-offer {
+  background: var(--accent-light);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: .88rem;
+  font-weight: 600;
+  color: #7a4f00;
+}
+.bookie-lucky15-bonus {
+  font-size: .83rem;
+  color: var(--text-muted);
+  background: var(--bg-alt);
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+.bookie-lucky15-bonus strong { color: var(--text); }
+
+.bookie-footer { display: flex; gap: 8px; align-items: center; margin-top: 2px; }
+.bookie-terms { font-size: .72rem; color: var(--text-muted); flex: 1; }
+
+/* ── Bet Types Grid ────────────────────────────────────────── */
+.bet-types-section { margin-top: 44px; }
+.bet-types-section h2 { margin-bottom: 18px; }
+
+.bet-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+  gap: 8px;
+}
+
+@media (max-width: 500px) {
+  .bet-types-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.bet-type-link {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: .86rem;
+  font-weight: 500;
+  color: var(--primary-mid);
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  border-left: 3px solid transparent;
+}
+.bet-type-link:hover {
+  background: var(--primary-light);
+  border-color: var(--primary-mid);
+  border-left-color: var(--accent);
+  text-decoration: none;
+  color: var(--primary);
+  transform: translateX(2px);
+}
+.bet-type-link .bet-count {
+  font-size: .73rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+/* ── Content sections ───────────────────────────────────────── */
+.content-section { margin-top: 50px; }
+.content-section + .content-section { margin-top: 38px; }
+
+.content-section h2 {
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.info-box {
+  background: var(--primary-light);
+  border-left: 4px solid var(--primary-mid);
+  padding: 14px 18px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 16px;
+  font-size: .95rem;
+}
+
+.formula-box {
+  background: #0f1f3d;
+  color: #e2e8f0;
+  padding: 18px 22px;
+  border-radius: var(--radius);
+  font-family: 'Courier New', monospace;
+  font-size: .88rem;
+  margin: 16px 0;
+  overflow-x: auto;
+  border-left: 4px solid var(--accent);
+}
+.formula-box .hl { color: var(--accent); font-weight: 700; }
+
+/* ── FAQ ─────────────────────────────────────────────────────── */
+.faq-list { display: flex; flex-direction: column; gap: 8px; }
+
+.faq-item {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.faq-item:has(.faq-question.open) { border-color: var(--primary-mid); }
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 15px 18px;
+  text-align: left;
+  font-size: .95rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+  transition: background var(--transition);
+}
+.faq-question:hover { background: var(--bg-alt); }
+.faq-question.open { background: var(--primary-light); color: var(--primary); }
+.faq-icon { font-size: 1.2rem; font-weight: 400; flex-shrink: 0; transition: transform var(--transition); color: var(--text-muted); }
+.faq-question.open .faq-icon { transform: rotate(45deg); color: var(--primary); }
+
+.faq-answer {
+  display: none;
+  padding: 0 18px 16px;
+  font-size: .92rem;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+  background: var(--white);
+}
+.faq-answer.open { display: block; }
+
+/* ── Bet definition table ──────────────────────────────────── */
+.bet-def-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+  margin: 16px 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.bet-def-table th {
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-mid) 100%);
+  color: var(--white);
+  padding: 11px 14px;
+  text-align: left;
+  font-weight: 600;
+}
+.bet-def-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.bet-def-table tr:last-child td { border-bottom: none; }
+.bet-def-table tr:nth-child(even) td { background: var(--bg-alt); }
+.bet-def-table tr:hover td { background: var(--primary-light); }
+
+/* ── Steps list ────────────────────────────────────────────── */
+.steps-list { list-style: none; padding: 0; counter-reset: step; }
+.steps-list li {
+  counter-increment: step;
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+  align-items: flex-start;
+}
+.steps-list li::before {
+  content: counter(step);
+  display: flex; align-items: center; justify-content: center;
+  min-width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--primary-mid), var(--primary));
+  color: var(--white);
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: .88rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  box-shadow: 0 2px 6px rgba(26,92,168,.25);
+}
+
+/* ── Promo badge ────────────────────────────────────────────── */
+.promo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  color: #7a4f00;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+/* ── Notice / disclaimer ────────────────────────────────────── */
+.age-notice {
+  background: var(--text);
+  color: rgba(255,255,255,.7);
+  text-align: center;
+  padding: 8px;
+  font-size: .8rem;
+}
+.age-notice a { color: rgba(255,255,255,.9); }
+
+/* ── Footer ────────────────────────────────────────────────── */
+.site-footer {
+  background: #0a1628;
+  color: rgba(255,255,255,.72);
+  padding: 52px 0 28px;
+  margin-top: 72px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 44px;
+}
+@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+.footer-brand .logo-text { color: var(--white); font-size: 1.3rem; }
+.footer-brand p { margin-top: 10px; font-size: .87rem; color: rgba(255,255,255,.48); line-height: 1.65; }
+
+.footer-col h4 {
+  color: var(--white);
+  font-size: .82rem;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  padding-bottom: 8px;
+}
+.footer-col ul { list-style: none; padding: 0; }
+.footer-col ul li { margin-bottom: 8px; }
+.footer-col ul a {
+  color: rgba(255,255,255,.55);
+  font-size: .87rem;
+  transition: color var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.footer-col ul a:hover { color: var(--white); text-decoration: none; }
+.footer-col ul a::before { content: '›'; opacity: .5; }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: .78rem;
+  color: rgba(255,255,255,.36);
+}
+.footer-bottom a { color: rgba(255,255,255,.45); }
+
+.responsible-gambling {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 18px;
+  border-radius: var(--radius);
+  margin-bottom: 36px;
+  font-size: .82rem;
+  color: rgba(255,255,255,.58);
+  text-align: center;
+  line-height: 1.65;
+}
+.responsible-gambling a { color: rgba(255,255,255,.75); }
+.responsible-gambling strong { color: rgba(255,255,255,.85); }
+
+.gambling-logos { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.gambling-logos span {
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.65);
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  font-size: .73rem;
+  font-weight: 700;
+}
+
+/* ── Highlight / Stat boxes ────────────────────────────────── */
+.highlight-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 20px 0;
+}
+.stat-box {
+  background: var(--primary-light);
+  border: 1.5px solid #b3d4f5;
+  border-radius: var(--radius);
+  padding: 16px 10px;
+  text-align: center;
+}
+.stat-box .stat-val { font-size: 1.7rem; font-weight: 800; color: var(--primary); line-height: 1; }
+.stat-box .stat-label { font-size: .73rem; color: var(--text-muted); margin-top: 5px; }
+
+/* ── Page sections spacing ─────────────────────────────────── */
+.page-content { padding: 34px 0 68px; }
+.section-block { margin-bottom: 42px; }
+.section-block:last-child { margin-bottom: 0; }
+
+/* ── Inline CTA ────────────────────────────────────────────── */
+.inline-cta {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+  border-radius: var(--radius);
+  padding: 28px;
+  color: var(--white);
+  text-align: center;
+  margin: 32px 0;
+}
+.inline-cta h3 { color: var(--white); margin-bottom: 8px; }
+.inline-cta p { color: rgba(255,255,255,.82); margin-bottom: 18px; }
+
+/* ── Table of contents ─────────────────────────────────────── */
+.toc {
+  background: var(--bg-alt);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 22px;
+  margin-bottom: 30px;
+}
+.toc h4 { margin-bottom: 10px; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+.toc ol { margin: 0; }
+.toc li { font-size: .9rem; margin-bottom: 5px; }
+
+/* ── Sticky calculator sidebar ─────────────────────────────── */
+.two-col-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 36px;
+  align-items: start;
+}
+@media (max-width: 960px) {
+  .two-col-layout { grid-template-columns: 1fr; }
+  .calc-sidebar { order: -1; }
+}
+
+.calc-sidebar .card {
+  position: sticky;
+  top: calc(var(--header-h) + 16px);
+}
+
+/* ── Scroll animations ─────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .card { animation: fadeUp .3s ease both; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Misc helpers ──────────────────────────────────────────── */
+.mt-8  { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mt-32 { margin-top: 32px; }
+.mb-8  { margin-bottom: 8px; }
+.mb-16 { margin-bottom: 16px; }
+.mb-24 { margin-bottom: 24px; }
+.text-muted { color: var(--text-muted); }
+.text-sm { font-size: .85rem; }
+.text-center { text-align: center; }
+.d-flex { display: flex; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.align-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 { flex: 1; }
+.hidden { display: none !important; }
+
+/* ── Hero animated shimmer ─────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .page-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 40%,
+      rgba(255,255,255,.04) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    animation: heroShimmer 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes heroShimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}
+
+/* ── Result value flash ────────────────────────────────────── */
+@keyframes resultPop {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.07); color: var(--primary-mid); }
+  100% { transform: scale(1); }
+}
+.result-pop { animation: resultPop .28s cubic-bezier(.34,1.56,.64,1) both; }
+
+/* ── Selection row pulse on change ────────────────────────── */
+@keyframes rowHighlight {
+  0%   { background: rgba(26,92,168,.06); }
+  100% { background: transparent; }
+}
+.row-highlight { animation: rowHighlight .5s ease both; }
+
+/* ── Bet-type link entrance ────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .bet-type-link {
+    transition: all var(--transition), opacity .3s ease, transform .3s ease;
+  }
+}
+
+/* ── Smooth number transition in result values ─────────────── */
+.result-value {
+  transition: color .2s ease;
+}
+
+/* ── Print ─────────────────────────────────────────────────── */
+@media print {
+  .site-header, .site-footer, .bookmakers-section, .bet-types-section { display: none; }
+  .card { box-shadow: none; border: 1px solid #ccc; }
+}

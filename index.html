@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Bet Calculator UK — All Bet Types | Lucky 15, Yankee, Accumulator & More</title>
+  <meta name="description" content="Free online bet calculator for UK punters. Calculate returns for Lucky 15, Yankee, Accumulator, Trixie and 30+ more bet types. Supports each-way, Rule 4, dead heat and bookmaker bonuses.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.betcalcuk.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "BetCalc UK",
+    "url": "https://www.betcalcuk.com",
+    "description": "Free bet calculator for UK punters. Calculate returns for all major bet types.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.betcalcuk.com/calculators/{search_term}",
+      "query-input": "required name=search_term"
+    }
+  }
+  </script>
+</head>
+<body class="page-wrapper">
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo" aria-label="BetCalc UK home">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="6" fill="rgba(255,255,255,0.15)"/>
+          <path d="M7 16L13 22L25 10" stroke="#f5a623" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-text">Bet<span>Calc</span> UK</span>
+      </a>
+      <button class="hamburger" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18"/>
+        </svg>
+      </button>
+      <nav class="site-nav" id="site-nav" role="navigation" aria-label="Main navigation"></nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="page-hero">
+    <h1>Free Bet Calculator UK</h1>
+    <p>Instantly calculate bet returns for horse racing, football, golf and all major sports. Lucky 15, Yankee, Accumulator and 30+ more bet types supported.</p>
+  </section>
+
+  <main>
+    <div class="container page-content">
+
+      <!-- Calculator Card -->
+      <div class="card calc-card" id="calculator" aria-label="Bet Calculator">
+        <div class="card-header">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/>
+          </svg>
+          Bet Calculator
+        </div>
+        <div class="card-body" id="calc-form">
+
+          <!-- Row 1: Bet Type + Each Way -->
+          <div class="calc-form-row">
+            <div class="form-group">
+              <label class="form-label" for="bet-type-select">Bet Type</label>
+              <select class="form-select" id="bet-type-select" aria-label="Bet type"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="each-way-select">Each Way?</label>
+              <select class="form-select" id="each-way-select">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Row 2: Odds Format + Rule 4 -->
+          <div class="calc-form-row">
+            <div class="form-group">
+              <label class="form-label">Odds Format</label>
+              <div class="odds-format-tabs" id="odds-format-tabs" role="group" aria-label="Odds format">
+                <button type="button" data-format="fractional" class="active">Fractional</button>
+                <button type="button" data-format="decimal">Decimal</button>
+                <button type="button" data-format="american">American</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rule4-toggle">Show Rule 4?</label>
+              <select class="form-select" id="rule4-toggle">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Num selections (for accumulators) -->
+          <div id="num-selections-wrap" class="form-group mb-16" style="display:none; max-width:200px">
+            <label class="form-label" for="num-selections">Number of Selections</label>
+            <input type="number" class="form-input" id="num-selections" min="2" max="20" value="4">
+          </div>
+
+          <!-- Selections header -->
+          <div class="selections-header" aria-hidden="true">
+            <span>#</span>
+            <span>Outcome</span>
+            <span>Odds</span>
+            <span class="rule4-col">Rule 4</span>
+          </div>
+
+          <!-- Selections container -->
+          <div id="selections-container" role="list" aria-label="Selections"></div>
+
+          <!-- Stake section -->
+          <div class="stake-section">
+            <div class="bet-count-row">
+              <span>Total bets: <strong id="bet-count">15</strong></span>
+              <span id="ew-badge" class="ew-badge" style="display:none">Each Way ×2</span>
+            </div>
+            <div class="stake-row">
+              <div class="form-group" style="width:160px">
+                <label class="form-label" for="stake-type-select">Stake Type</label>
+                <select class="form-select" id="stake-type-select">
+                  <option value="per-bet">Stake Per Bet</option>
+                  <option value="total">Total Stake</option>
+                </select>
+              </div>
+              <div class="form-group flex-1">
+                <label class="form-label" for="stake-input">Stake (£)</label>
+                <div class="stake-input-wrap">
+                  <span class="stake-prefix">£</span>
+                  <input type="number" class="form-input" id="stake-input" min="0.01" step="0.01" placeholder="0.00" aria-label="Stake amount">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bookmaker Bonuses -->
+          <details class="bonuses-section">
+            <summary style="cursor:pointer; font-weight:600; font-size:.9rem; color:var(--primary); margin-bottom:12px; list-style:none;">
+              ▸ Bookmaker Bonuses (Optional)
+            </summary>
+            <div class="bonuses-grid">
+              <div class="form-group">
+                <label class="form-label" for="one-winner-consolation">One Winner Consolation</label>
+                <select class="form-select" id="one-winner-consolation">
+                  <option value="none">None</option>
+                  <option value="double">Double Odds</option>
+                  <option value="treble">Treble Odds</option>
+                  <option value="quadruple">Quadruple Odds</option>
+                  <option value="quintuple">Quintuple Odds</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="all-winners-bonus">All Winners Bonus (%)</label>
+                <input type="number" class="form-input" id="all-winners-bonus" min="0" max="200" step="1" placeholder="e.g. 10">
+              </div>
+            </div>
+          </details>
+
+          <!-- Results -->
+          <div class="results-panel" role="region" aria-live="polite" aria-label="Results">
+            <div class="results-grid">
+              <div class="result-item">
+                <div class="result-label">Total Outlay</div>
+                <div class="result-value" id="result-outlay">-</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Total Return</div>
+                <div class="result-value" id="result-return">-</div>
+              </div>
+              <div class="result-item">
+                <div class="result-label">Total Profit</div>
+                <div class="result-value" id="result-profit">-</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reset -->
+          <div class="mt-16 d-flex justify-between align-center flex-wrap gap-8">
+            <button type="button" class="btn btn-outline btn-sm" id="reset-btn">↺ Reset Calculator</button>
+            <span class="text-sm text-muted">18+ | Bet Responsibly | <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a></span>
+          </div>
+
+        </div>
+      </div>
+      <!-- /Calculator Card -->
+
+      <!-- Top Bookmakers -->
+      <section class="bookmakers-section section-block" aria-label="Top bookmakers">
+        <h2>Top UK Bookmakers — Best Welcome Offers</h2>
+        <p class="section-intro">Compare welcome bonuses and Lucky 15 promotions from the UK's leading bookmakers.</p>
+        <div class="bookmakers-grid" id="bookmakers-grid">
+          <!-- Injected by JS or static -->
+        </div>
+      </section>
+
+      <!-- How to use -->
+      <section class="content-section section-block">
+        <h2>How to Use the Bet Calculator</h2>
+        <ol class="steps-list">
+          <li><strong>Select Your Bet Type</strong> — Choose from over 30 bet types in the dropdown, from a simple Single to complex Union Jack bets.</li>
+          <li><strong>Choose Your Odds Format</strong> — Toggle between Fractional (5/2), Decimal (3.50), or American (+250) to match your bookmaker.</li>
+          <li><strong>Enter Odds &amp; Outcomes</strong> — Set each selection's odds and result: Winner, Placed, Loser, Dead Heat or Void/Non-Runner.</li>
+          <li><strong>Input Your Stake</strong> — Enter either a Stake Per Bet or a Total Combined Stake.</li>
+          <li><strong>View Your Returns</strong> — Total Outlay, Total Return and Total Profit update in real time as you type.</li>
+          <li><strong>Add Rule 4 or Bonuses</strong> — Enable Rule 4 for horse racing deductions, or add bookmaker bonuses (e.g. Betfred Lucky 15 double odds on one winner).</li>
+        </ol>
+      </section>
+
+      <!-- Bet Types Grid -->
+      <section class="bet-types-section section-block" aria-label="All bet type calculators">
+        <h2>Specific Bet Type Calculators</h2>
+        <div class="bet-types-grid">
+          <a href="calculators/single.html" class="bet-type-link">Single <span class="bet-count">1 bet</span></a>
+          <a href="calculators/each-way.html" class="bet-type-link">Each Way <span class="bet-count">2 bets</span></a>
+          <a href="calculators/double.html" class="bet-type-link">Double <span class="bet-count">1 bet</span></a>
+          <a href="calculators/treble.html" class="bet-type-link">Treble <span class="bet-count">1 bet</span></a>
+          <a href="calculators/accumulator.html" class="bet-type-link">Accumulator <span class="bet-count">1 bet</span></a>
+          <a href="calculators/trixie.html" class="bet-type-link">Trixie <span class="bet-count">4 bets</span></a>
+          <a href="calculators/patent.html" class="bet-type-link">Patent <span class="bet-count">7 bets</span></a>
+          <a href="calculators/yankee.html" class="bet-type-link">Yankee <span class="bet-count">11 bets</span></a>
+          <a href="calculators/canadian.html" class="bet-type-link">Canadian <span class="bet-count">26 bets</span></a>
+          <a href="calculators/super-yankee.html" class="bet-type-link">Super Yankee <span class="bet-count">26 bets</span></a>
+          <a href="calculators/heinz.html" class="bet-type-link">Heinz <span class="bet-count">57 bets</span></a>
+          <a href="calculators/super-heinz.html" class="bet-type-link">Super Heinz <span class="bet-count">120 bets</span></a>
+          <a href="calculators/goliath.html" class="bet-type-link">Goliath <span class="bet-count">247 bets</span></a>
+          <a href="calculators/lucky-15.html" class="bet-type-link" style="border-color:var(--accent);background:#fff8e7">Lucky 15 <span class="bet-count">15 bets</span></a>
+          <a href="calculators/lucky-31.html" class="bet-type-link" style="border-color:var(--accent);background:#fff8e7">Lucky 31 <span class="bet-count">31 bets</span></a>
+          <a href="calculators/lucky-63.html" class="bet-type-link" style="border-color:var(--accent);background:#fff8e7">Lucky 63 <span class="bet-count">63 bets</span></a>
+          <a href="calculators/alphabet.html" class="bet-type-link">Alphabet <span class="bet-count">26 bets</span></a>
+          <a href="calculators/single-stakes-about.html" class="bet-type-link">Single Stakes About <span class="bet-count">2 bets</span></a>
+          <a href="calculators/double-stakes-about.html" class="bet-type-link">Double Stakes About <span class="bet-count">2 bets</span></a>
+          <a href="calculators/round-robin.html" class="bet-type-link">Round Robin <span class="bet-count">10 bets</span></a>
+          <a href="calculators/flag.html" class="bet-type-link">Flag <span class="bet-count">23 bets</span></a>
+          <a href="calculators/super-flag.html" class="bet-type-link">Super Flag <span class="bet-count">46 bets</span></a>
+          <a href="calculators/heinz-flag.html" class="bet-type-link">Heinz Flag <span class="bet-count">87 bets</span></a>
+          <a href="calculators/super-heinz-flag.html" class="bet-type-link">Super Heinz Flag <span class="bet-count">162 bets</span></a>
+          <a href="calculators/goliath-flag.html" class="bet-type-link">Goliath Flag <span class="bet-count">303 bets</span></a>
+          <a href="calculators/union-jack-trebles.html" class="bet-type-link">Union Jack Trebles <span class="bet-count">8 bets</span></a>
+          <a href="calculators/union-jack-trixie.html" class="bet-type-link">Union Jack Trixie <span class="bet-count">32 bets</span></a>
+          <a href="calculators/union-jack-patent.html" class="bet-type-link">Union Jack Patent <span class="bet-count">56 bets</span></a>
+          <a href="calculators/union-jack-round-robin.html" class="bet-type-link">Union Jack Round Robin <span class="bet-count">80 bets</span></a>
+          <a href="calculators/parlay.html" class="bet-type-link">Parlay <span class="bet-count">1 bet</span></a>
+        </div>
+      </section>
+
+      <!-- Bet Types Definition Table -->
+      <section class="content-section section-block">
+        <h2>Bet Type Definitions</h2>
+        <p>Not sure which bet type to use? Here's a quick reference for all major bet types:</p>
+        <div style="overflow-x:auto">
+        <table class="bet-def-table">
+          <thead>
+            <tr><th>Bet Type</th><th>Selections</th><th>Bets</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><a href="calculators/single.html">Single</a></td><td>1</td><td>1</td><td>1 bet on 1 selection.</td></tr>
+            <tr><td><a href="calculators/double.html">Double</a></td><td>2</td><td>1</td><td>1 bet on 2 selections — both must win.</td></tr>
+            <tr><td><a href="calculators/treble.html">Treble</a></td><td>3</td><td>1</td><td>1 bet on 3 selections — all must win.</td></tr>
+            <tr><td><a href="calculators/accumulator.html">Accumulator</a></td><td>4+</td><td>1</td><td>1 bet on 4 or more selections.</td></tr>
+            <tr><td><a href="calculators/trixie.html">Trixie</a></td><td>3</td><td>4</td><td>3 doubles + 1 treble.</td></tr>
+            <tr><td><a href="calculators/patent.html">Patent</a></td><td>3</td><td>7</td><td>3 singles + 3 doubles + 1 treble.</td></tr>
+            <tr><td><a href="calculators/yankee.html">Yankee</a></td><td>4</td><td>11</td><td>6 doubles + 4 trebles + 1 four-fold.</td></tr>
+            <tr><td><a href="calculators/canadian.html">Canadian</a></td><td>5</td><td>26</td><td>10 doubles + 10 trebles + 5 four-folds + 1 five-fold.</td></tr>
+            <tr><td><a href="calculators/heinz.html">Heinz</a></td><td>6</td><td>57</td><td>15 doubles + 20 trebles + 15 four-folds + 6 five-folds + 1 six-fold.</td></tr>
+            <tr><td><a href="calculators/goliath.html">Goliath</a></td><td>8</td><td>247</td><td>28 doubles + 56 trebles + 70 four-folds + 56 five-folds + 28 six-folds + 8 seven-folds + 1 eight-fold.</td></tr>
+            <tr><td><a href="calculators/lucky-15.html"><strong>Lucky 15</strong></a></td><td>4</td><td>15</td><td>4 singles + 6 doubles + 4 trebles + 1 four-fold.</td></tr>
+            <tr><td><a href="calculators/lucky-31.html">Lucky 31</a></td><td>5</td><td>31</td><td>5 singles + 10 doubles + 10 trebles + 5 four-folds + 1 five-fold.</td></tr>
+            <tr><td><a href="calculators/lucky-63.html">Lucky 63</a></td><td>6</td><td>63</td><td>6 singles + 15 doubles + 20 trebles + 15 four-folds + 6 five-folds + 1 six-fold.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section class="content-section section-block">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-list" id="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What is a Lucky 15 bet?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>A Lucky 15 is a full-cover bet consisting of 15 individual bets across 4 selections: 4 singles, 6 doubles, 4 trebles, and 1 four-fold accumulator. You only need 1 winner to get a return, but the more winners you have, the greater your profit.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How does Each Way betting work?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>An Each Way bet is actually two bets: one for the selection to win and one for it to place (finish in the top 2, 3, 4 or 5 positions, depending on the race). The place part pays out at a fraction of the win odds (commonly 1/4 or 1/5).</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What is a Rule 4 deduction?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>A Rule 4 deduction applies when a horse is withdrawn from a race after you've placed your bet. Because the non-runner improves the chances of remaining horses, bookmakers reduce your winnings by a percentage (5p to 75p per £1 won). Enable Rule 4 in the calculator to account for this.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What happens if a selection is a void or non-runner?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>If a selection is void or a non-runner, it is simply removed from each combination it was part of. For example, in a double, it becomes a single. In a treble, it becomes a double. Your stake for the affected bets is returned.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What is the difference between Stake Per Bet and Total Stake?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p><strong>Stake Per Bet</strong>: The amount you wager on each individual line. A £1 Lucky 15 stake per bet costs £15 total (15 × £1).<br><strong>Total Stake</strong>: The total amount you wish to spend. This is divided equally across all bets. A £15 total stake on a Lucky 15 means £1 per bet.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Do bookmakers offer bonuses on Lucky 15 bets?
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p>Yes! Many UK bookmakers offer consolation bonuses on Lucky 15 bets. For example, Betfred pays <strong>double odds</strong> if you have just one winner, and <strong>10% bonus</strong> if all four selections win. Coral pays <strong>treble odds</strong> on a single winner. Use the Bookmaker Bonuses section in the calculator to factor these in.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="responsible-gambling">
+        <strong>Gamble Responsibly.</strong> 18+ only. Gambling should be entertaining. If you feel gambling is becoming a problem, please visit
+        <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a> or call the National Gambling Helpline on <strong>0808 8020 133</strong>.
+        <div class="gambling-logos mt-8" style="justify-content:center">
+          <span>18+</span>
+          <span>BeGambleAware</span>
+          <span>GamCare</span>
+          <span>GamStop</span>
+        </div>
+      </div>
+
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-text">Bet<span style="color:var(--accent)">Calc</span> UK</div>
+          <p>The UK's most comprehensive free bet calculator. Trusted by thousands of punters for accurate, instant betting returns calculations.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Calculators</h4>
+          <ul>
+            <li><a href="calculators/lucky-15.html">Lucky 15</a></li>
+            <li><a href="calculators/lucky-31.html">Lucky 31</a></li>
+            <li><a href="calculators/yankee.html">Yankee</a></li>
+            <li><a href="calculators/accumulator.html">Accumulator</a></li>
+            <li><a href="calculators/each-way.html">Each Way</a></li>
+            <li><a href="index.html">Full List</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="guides/what-is-a-lucky-15.html">What is a Lucky 15?</a></li>
+            <li><a href="guides/what-is-a-yankee.html">What is a Yankee?</a></li>
+            <li><a href="guides/what-is-an-accumulator.html">What is an Accumulator?</a></li>
+            <li><a href="guides/each-way-betting-explained.html">Each Way Explained</a></li>
+            <li><a href="guides/rule-4-deductions.html">Rule 4 Explained</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Information</h4>
+          <ul>
+            <li><a href="bookmakers.html">Best Bookmakers</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="about.html#privacy">Privacy Policy</a></li>
+            <li><a href="about.html#terms">Terms of Use</a></li>
+            <li><a href="about.html#cookies">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>&copy; 2026 BetCalc UK. All rights reserved.</span>
+        <span>This site contains commercial content. <a href="about.html#disclaimer">Disclaimer</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/odds-utils.js"></script>
+  <script src="js/calculator-engine.js"></script>
+  <script src="js/calculator-ui.js"></script>
+  <script>
+    // Bookmakers data
+    const BOOKMAKERS = [
+      { id: 'bet365', name: 'bet365', logo: 'images/bookmakers/bet365.svg', rating: 5, offer: 'Bet £10 Get £30 in Free Bets', lucky15: 'Standard Lucky 15 terms', link: '#bet365', terms: 'New customers. Min deposit £10. T&Cs apply. 18+' },
+      { id: 'betfred', name: 'Betfred', logo: 'images/bookmakers/betfred.svg', rating: 5, offer: '60 Free Spins + £30 Bonus', lucky15: 'Lucky 15 bonus: <strong>Double odds</strong> on 1 winner, <strong>10% bonus</strong> on 4 winners', link: '#betfred', terms: 'New customers only. T&Cs apply. 18+' },
+      { id: 'paddypower', name: 'Paddy Power', logo: 'images/bookmakers/paddypower.svg', rating: 4, offer: 'Bet £20 Get £20 Free', lucky15: 'Lucky 15 bonus: <strong>Treble odds</strong> on a single winner', link: '#paddypower', terms: 'New customers. T&Cs apply. 18+' },
+      { id: 'coral', name: 'Coral', logo: 'images/bookmakers/coral.svg', rating: 4, offer: 'Bet £5 Get £20', lucky15: 'Lucky 15 bonus: <strong>Double odds</strong> on 1 winner, <strong>10% bonus</strong> all winners', link: '#coral', terms: 'New customers. Min £5 deposit. T&Cs apply. 18+' },
+      { id: 'williamhill', name: 'William Hill', logo: 'images/bookmakers/williamhill.svg', rating: 4, offer: 'Bet £10 Get £40 in Free Bets', lucky15: 'Standard Lucky 15 — no bonus', link: '#williamhill', terms: 'New customers. T&Cs apply. 18+' },
+      { id: 'skybet', name: 'Sky Bet', logo: 'images/bookmakers/skybet.svg', rating: 4, offer: 'Bet £10 Get £40 in Free Bets', lucky15: 'Standard Lucky 15 terms', link: '#skybet', terms: 'New customers. T&Cs apply. 18+' },
+    ];
+
+    function renderStars(n) {
+      return '★'.repeat(n) + '☆'.repeat(5 - n);
+    }
+
+    function renderBookmakers() {
+      const grid = document.getElementById('bookmakers-grid');
+      if (!grid) return;
+      grid.innerHTML = BOOKMAKERS.map(b => `
+        <div class="bookie-card">
+          <div class="bookie-header">
+            <div class="bookie-logo"><img src="${b.logo}" alt="${b.name} logo" width="54" height="38" loading="lazy"></div>
+            <div>
+              <div class="bookie-name">${b.name}</div>
+              <div class="bookie-rating" aria-label="${b.rating} out of 5 stars">${renderStars(b.rating)}</div>
+            </div>
+          </div>
+          <div class="bookie-offer">${b.offer}</div>
+          <div class="bookie-lucky15-bonus"><strong>Lucky 15:</strong> ${b.lucky15}</div>
+          <div class="bookie-footer">
+            <span class="bookie-terms">${b.terms}</span>
+            <a href="${b.link}" class="btn btn-accent btn-sm" rel="nofollow noopener" target="_blank">Claim Offer</a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    renderBookmakers();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isOpen = btn.classList.contains('open');
+        document.querySelectorAll('.faq-question').forEach(b => {
+          b.classList.remove('open');
+          b.setAttribute('aria-expanded', 'false');
+          b.nextElementSibling.classList.remove('open');
+        });
+        if (!isOpen) {
+          btn.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+          btn.nextElementSibling.classList.add('open');
+        }
+      });
+    });
+
+  </script>
+
+  <script src="js/nav.js"></script>
+  <script src="js/animations.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Lucky 15 bet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Lucky 15 is a full-cover bet consisting of 15 individual bets across 4 selections: 4 singles, 6 doubles, 4 trebles, and 1 four-fold accumulator. You only need 1 winner to get a return."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a Rule 4 deduction?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Rule 4 deduction applies when a horse is withdrawn from a race after you've placed your bet. Bookmakers reduce your winnings by a percentage from 5p to 75p per £1 won."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Stake Per Bet and Total Stake?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Stake Per Bet is the amount wagered on each individual line — a £1 Lucky 15 costs £15 total. Total Stake is the overall amount divided equally across all bets."
+        }
+      }
+    ]
+  }
+  </script>
+</body>
+</html>

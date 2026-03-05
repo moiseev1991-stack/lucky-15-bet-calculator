@@ -1,0 +1,32 @@
+---
+description: Always update docs/OVERVIEW.md change log after making any changes to the project
+alwaysApply: true
+---
+
+# Keep docs/OVERVIEW.md Up to Date
+
+After **every substantive change** to this project, append a new entry to the **Change Log** section at the bottom of `docs/OVERVIEW.md`.
+
+## Required entry format
+
+```markdown
+### YYYY-MM-DD — Short title describing what changed
+
+**What was done:**
+- Bullet point explaining each change
+- Include WHY if not obvious
+
+**How it works:**
+- Brief explanation of any new logic or behaviour introduced
+
+**Files affected:** `path/to/file.ext` (new|modified|deleted)
+```
+
+## Rules
+
+- Add the entry **above** the `_Add new entries above this line_` footer line
+- Most recent entry goes **first** (reverse chronological)
+- If you only updated `docs/OVERVIEW.md` itself (e.g. fixing a typo in the docs), you do NOT need a new change log entry
+- If a feature or section of OVERVIEW.md is now outdated due to your change, update that section too
+- Keep entries concise — 3-10 bullet points max
+- Reference `docs/OVERVIEW.md` before making changes to understand the current state of the project
