@@ -191,6 +191,22 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-05 — Gate page rebuilt with Crazy Time stats embed
+
+**What was done:**
+- Replaced the simple redirect-only `gate/index.html` with a full content page containing the Crazy Time live stats widget
+- The page uses the site's header, hero, footer and shared CSS/JS (nav.js, animations.js) via `../` relative paths
+- The "Where To Play Crazy Time" section inside the embed lists all 8 bookmakers on the site (bet365, Betfred, Paddy Power, Coral, William Hill, Sky Bet, Ladbrokes, Betfair) with GET BONUS buttons linking to `/gate/` (no parameters)
+- `noindex, nofollow` meta tag retained so the page is not indexed by search engines
+
+**How it works:**
+- User clicks any "Claim Offer" / "View Offer" link across the site → lands on `/gate/` → sees the Crazy Time stats embed + bookmaker bonus cards
+- All GET BONUS buttons link to `/gate/` with no query parameters for now
+
+**Files affected:** `gate/index.html` (modified)
+
+---
+
 ### 2026-03-05 — Internal links: replace index.html with clean root URL
 
 **What was done:**
