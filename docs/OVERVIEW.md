@@ -1,6 +1,6 @@
 # BetCalc UK — Project Overview & Change Log
 
-**URL:** https://www.betcalcuk.com  
+**URL:** https://lucky-15-bet-calculator.uk  
 **Stack:** Vanilla HTML / CSS / JavaScript (no framework, no build step required)  
 **Last updated:** 2026-03-04
 
@@ -191,6 +191,46 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-05 — Internal links: replace index.html with clean root URL
+
+**What was done:**
+- Replaced all internal links to `index.html` with `/` so links point to `https://lucky-15-bet-calculator.uk/`
+- Updated `nav.js` (Home link), `index.html`, `bookmakers.html`, `about.html`, `build.js`, `generate-calc-pages.ps1`, all calculators and guides
+- `/index.html` still 301-redirects to `/` via `.htaccess` and `_redirects`
+
+**Files affected:** `js/nav.js`, `index.html`, `bookmakers.html`, `about.html`, `build.js`, `generate-calc-pages.ps1`, `calculators/*.html`, `guides/*.html` (modified)
+
+---
+
+### 2026-03-05 — SEO update: homepage title, description, hero paragraph
+
+**What was done:**
+- Updated `<title>` to: Lucky 15 Bet Calculator: Free & Accurate UK Tool 2026
+- Updated meta description for UK horse racing focus and 2026
+- Replaced hero paragraph with longer intro highlighting Lucky 15, each-way, Rule 4, and Betfred-style bonuses
+
+**Files affected:** `index.html` (modified)
+
+---
+
+### 2026-03-05 — Gate page with redirect to tracker
+
+**What was done:**
+- Created `gate/index.html` — gate page with Crazy Time stats embed and instant redirect to tracker URL
+- Redirect script reads `bk` query param (bookmaker id) and appends to tracker URL for attribution
+- Meta `noindex, nofollow` and meta refresh fallback for no-JS
+- Updated all Claim Offer / View Offer links across site to `/gate/?bk={id}` instead of `#` or anchor
+- Bookmakers: bet365, betfred, paddypower, coral, williamhill, skybet, ladbrokes, betfair
+- Updated `index.html`, `bookmakers.html`, `build.js`, `generate-calc-pages.ps1`, all 29 calculator pages
+
+**How it works:**
+- User clicks Claim Offer → `/gate/?bk=bet365` → instant redirect to `https://TRACKER_URL_HERE?bk=bet365`
+- Replace `https://TRACKER_URL_HERE` in gate/index.html with actual tracker URL
+
+**Files affected:** `gate/index.html` (new), `index.html`, `bookmakers.html`, `build.js`, `generate-calc-pages.ps1`, `calculators/*.html` (modified)
+
+---
+
 ### 2026-03-05 — Bookmaker logo images added to bookie cards
 
 **What was done:**
@@ -303,7 +343,7 @@ All significant changes made to this project are recorded below. Most recent fir
 ### 2026-03-05 — Removed canonical links from all pages
 
 **What was done:**
-- Removed `<link rel="canonical">` pointing to `https://www.betcalcuk.com/` from all HTML pages
+- Removed `<link rel="canonical">` pointing to `https://lucky-15-bet-calculator.uk/` from all HTML pages
 - Canonical tag was non-canonical (wrong domain) and caused SEO errors on lucky-15-bet-calculator.uk
 - Updated `build.js` and `generate-calc-pages.ps1` so future generated pages no longer include canonical
 
@@ -323,6 +363,30 @@ All significant changes made to this project are recorded below. Most recent fir
 - Pushed `main` branch to GitHub (59 files)
 
 **Files affected:** `.gitignore` (new), `.git/` (new repository)
+
+---
+
+### 2026-03-05 — Redirect /index.html to clean root URL
+
+**What was done:**
+- Added `.htaccess` (Apache): 301 redirect from `/index.html` to `/`
+- Added `_redirects` (Netlify): same rule for Netlify deployments
+
+**How it works:**
+- Visiting `https://lucky-15-bet-calculator.uk/index.html` now redirects to `https://lucky-15-bet-calculator.uk/`
+- Root `/` still serves index.html; only the explicit `/index.html` URL redirects
+
+**Files affected:** `.htaccess` (new), `_redirects` (new)
+
+---
+
+### 2026-03-05 — Domain replacement: betcalcuk.com → lucky-15-bet-calculator.uk
+
+**What was done:**
+- Replaced all references to betcalcuk.com with https://lucky-15-bet-calculator.uk
+- Updated sitemap.xml, robots.txt, index.html (JSON-LD), about.html (email), docs/OVERVIEW.md
+
+**Files affected:** `about.html`, `index.html`, `robots.txt`, `sitemap.xml`, `docs/OVERVIEW.md` (modified)
 
 ---
 

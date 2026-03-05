@@ -4,4 +4,4 @@ Disallow: /build.js
 Disallow: /generate-calc-pages.ps1
 Disallow: /js/generate-pages.js
 
-Sitemap: https://www.betcalcuk.com/sitemap.xml
+Sitemap: https://lucky-15-bet-calculator.uk/sitemap.xml

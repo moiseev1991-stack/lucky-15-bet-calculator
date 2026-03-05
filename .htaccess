@@ -1,0 +1,5 @@
+# Redirect /index.html to clean root URL
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>

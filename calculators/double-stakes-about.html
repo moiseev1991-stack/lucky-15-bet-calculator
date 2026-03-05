@@ -12,7 +12,7 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <a href="../index.html" class="site-logo" aria-label="BetCalc UK home">
+      <a href="/" class="site-logo" aria-label="BetCalc UK home">
         <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
           <rect width="32" height="32" rx="6" fill="rgba(255,255,255,0.15)"/>
           <path d="M7 16L13 22L25 10" stroke="#f5a623" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
@@ -36,8 +36,8 @@
   <nav class="breadcrumb" aria-label="Breadcrumb">
     <div class="container">
       <ol>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../index.html#calculators">Calculators</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#calculators">Calculators</a></li>
         <li>Double Stakes About (DSA) Bet Calculator</li>
       </ol>
     </div>
@@ -192,7 +192,7 @@
           <a href="patent.html" class="bet-type-link">Patent <span class="bet-count">7 bets</span></a>
           <a href="trixie.html" class="bet-type-link">Trixie <span class="bet-count">4 bets</span></a>
           <a href="each-way.html" class="bet-type-link">Each Way <span class="bet-count">2 bets</span></a>
-          <a href="../index.html" class="bet-type-link" style="grid-column:span 2">View All Calculators &rarr;</a>
+          <a href="/" class="bet-type-link" style="grid-column:span 2">View All Calculators &rarr;</a>
         </div>
       </section>
 
@@ -220,7 +220,7 @@
             <li><a href="lucky-31.html">Lucky 31</a></li>
             <li><a href="yankee.html">Yankee</a></li>
             <li><a href="accumulator.html">Accumulator</a></li>
-            <li><a href="../index.html">Full List</a></li>
+            <li><a href="/">Full List</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -253,10 +253,10 @@
   <script src="../js/calculator-ui.js"></script>
   <script>
     const BOOKMAKERS = [
-      { id:'bet365', name:'bet365', rating:5, offer:'Bet £10 Get £30 in Free Bets', lucky15:'Standard Lucky 15 terms', link:'#bet365', terms:'New customers. T&C apply. 18+' },
-      { id:'betfred', name:'Betfred', rating:5, offer:'£30 Free Bets + Bonuses', lucky15:'<strong>Double odds</strong> on 1 winner, <strong>10% bonus</strong> all winners', link:'#betfred', terms:'New customers only. T&C apply. 18+' },
-      { id:'paddypower', name:'Paddy Power', rating:4, offer:'Bet £20 Get £20 Free', lucky15:'<strong>Treble odds</strong> on a single winner', link:'#paddypower', terms:'New customers. T&C apply. 18+' },
-      { id:'coral', name:'Coral', rating:4, offer:'Bet £5 Get £20', lucky15:'<strong>Double odds</strong> on 1 winner, <strong>10% bonus</strong> all winners', link:'#coral', terms:'New customers. T&C apply. 18+' },
+      { id:'bet365', name:'bet365', rating:5, offer:'Bet £10 Get £30 in Free Bets', lucky15:'Standard Lucky 15 terms', link:'../gate/?bk=bet365', terms:'New customers. T&C apply. 18+' },
+      { id:'betfred', name:'Betfred', rating:5, offer:'£30 Free Bets + Bonuses', lucky15:'<strong>Double odds</strong> on 1 winner, <strong>10% bonus</strong> all winners', link:'../gate/?bk=betfred', terms:'New customers only. T&C apply. 18+' },
+      { id:'paddypower', name:'Paddy Power', rating:4, offer:'Bet £20 Get £20 Free', lucky15:'<strong>Treble odds</strong> on a single winner', link:'../gate/?bk=paddypower', terms:'New customers. T&C apply. 18+' },
+      { id:'coral', name:'Coral', rating:4, offer:'Bet £5 Get £20', lucky15:'<strong>Double odds</strong> on 1 winner, <strong>10% bonus</strong> all winners', link:'../gate/?bk=coral', terms:'New customers. T&C apply. 18+' },
     ];
     function renderStars(n) { return '★'.repeat(n) + '☆'.repeat(5-n); }
     function renderBookmakers() {

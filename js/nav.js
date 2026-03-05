@@ -101,7 +101,7 @@
     var calcActive  = p.includes('/calculators/') ? ' active' : '';
 
     return (
-      '<a' + homeActive + ' href="' + prefixed('index.html') + '">Home</a>' +
+      '<a' + homeActive + ' href="/">Home</a>' +
       '<div class="nav-calc-wrap">' +
         '<button type="button" class="nav-calc-btn' + calcActive + '" id="calc-dropdown-btn" aria-haspopup="true" aria-expanded="false">' +
           'Calculators ' +
@@ -144,7 +144,7 @@
     var calcActive  = p.includes('/calculators/') ? ' active' : '';
 
     return (
-      '<a' + homeActive + ' href="' + prefixed('index.html') + '">Home</a>' +
+      '<a' + homeActive + ' href="/">Home</a>' +
       '<div class="mob-calc-section">' +
         '<button type="button" class="mob-calc-section-btn' + calcActive + '" id="mob-calc-section-btn" aria-expanded="false">' +
           'Calculators ' +
