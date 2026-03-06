@@ -191,6 +191,18 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-06 — Google Search Console verification meta tag added
+
+**What was done:**
+- Added `<meta name="google-site-verification" content="iN1uH_ZlnVdyoQkXidwhLAjMkLbgJ0zlh_-F4Urtm_c" />` to all 37 HTML pages
+- Skipped `gate/index.html` (page is deleted and marked `noindex`)
+- Tag placed on line 5 of each file, right after `<meta charset="UTF-8">`
+- Deployed to GitHub (`main` branch, commit `9c512d9`)
+
+**Files affected:** `index.html`, `about.html`, `bookmakers.html`, all `calculators/*.html`, all `guides/*.html` (modified)
+
+---
+
 ### 2026-03-05 — Removed calculators/lucky-15.html and all links to it
 
 **What was done:**
