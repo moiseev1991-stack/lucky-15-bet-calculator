@@ -191,6 +191,17 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-06 — Redirect page for calculators/lucky-15.html
+
+**What was done:**
+- Created `calculators/lucky-15.html` as an instant redirect to `/` (homepage)
+- Uses both `<meta http-equiv="refresh">` and `window.location.replace()` for maximum compatibility
+- Ensures any browser/CDN cached links to the old Lucky 15 calculator page land on the homepage instead of a 404
+
+**Files affected:** `calculators/lucky-15.html` (new)
+
+---
+
 ### 2026-03-06 — Google Search Console verification meta tag added
 
 **What was done:**
