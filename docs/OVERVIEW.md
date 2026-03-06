@@ -191,6 +191,16 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-06 — Remove phone number; force nav.js cache refresh
+
+**What was done:**
+- Removed phone number `0808 8020 133` from all 35 HTML pages (footer, about page, bookmakers page)
+- Added `?v=2` version query string to `nav.js` script tag in all 37 HTML pages to force browser cache invalidation (fixes stale nav.js serving old Lucky 15 dropdown link)
+
+**Files affected:** all `calculators/*.html`, all `guides/*.html`, `index.html`, `about.html`, `bookmakers.html` (modified)
+
+---
+
 ### 2026-03-06 — Redirect page for calculators/lucky-15.html
 
 **What was done:**
