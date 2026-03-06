@@ -191,6 +191,17 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-06 — Full bet-type grid on all calculator pages
+
+**What was done:**
+- Replaced the small "More Bet Type Calculators" section (7 links) on all 29 calculator pages with the full "Specific Bet Type Calculators" grid (30 links — matches homepage)
+- Added **Lucky 15** as the first highlighted (gold accent) link in the grid, pointing to `../` (homepage)
+- Lucky 31 and Lucky 63 remain highlighted in gold as before
+
+**Files affected:** all `calculators/*.html` (modified)
+
+---
+
 ### 2026-03-06 — Remove phone number; force nav.js cache refresh
 
 **What was done:**
