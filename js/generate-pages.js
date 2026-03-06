@@ -199,25 +199,6 @@ const CALC_PAGES = [
     ]
   },
   {
-    key: 'lucky-15', file: 'lucky-15.html',
-    title: 'Lucky 15 Bet Calculator UK — Instantly Work Out Your Winnings | BetCalc UK',
-    metaDesc: 'Free Lucky 15 bet calculator. 4 singles, 6 doubles, 4 trebles, 1 four-fold = 15 bets. Supports each-way, Rule 4, dead heat and bookmaker bonuses.',
-    h1: 'Lucky 15 Bet Calculator',
-    intro: 'The Lucky 15 is one of the most popular bets in UK horse racing. It covers 4 selections with 15 bets — you only need 1 winner to get a return. Use our calculator to instantly work out your winnings, even with each-way terms and bookmaker bonuses.',
-    what: '<p>A <strong>Lucky 15</strong> consists of <strong>4 singles</strong>, <strong>6 doubles</strong>, <strong>4 trebles</strong>, and <strong>1 four-fold accumulator</strong> across 4 selections — 15 bets in total. Because singles are included, just one winning selection returns a profit. Many UK bookmakers offer consolation bonuses: double odds if only one selection wins, or a percentage bonus if all four win.</p>',
-    formula: 'Bets = C(4,1)+C(4,2)+C(4,3)+C(4,4)\n     = 4+6+4+1 = 15\n\n£1 Lucky 15 total outlay = £15\n£0.50 Lucky 15 total outlay = £7.50',
-    selections: 4, bets: 15,
-    faqs: [
-      { q: 'What is a Lucky 15 bet?', a: 'A Lucky 15 is a full-cover bet across 4 selections: 4 singles, 6 doubles, 4 trebles, and 1 four-fold accumulator — 15 individual bets in total.' },
-      { q: 'How much is a £1 Lucky 15?', a: 'A £1 Lucky 15 costs £15 total (15 bets × £1 each).' },
-      { q: 'How much is a 50p Lucky 15?', a: 'A 50p Lucky 15 costs £7.50 total (15 × £0.50).' },
-      { q: 'Do I need all 4 to win a Lucky 15?', a: 'No. Just one winner gives you a return from the singles. Two or more winners means the doubles also pay out, significantly increasing your return.' },
-      { q: 'What Lucky 15 bonuses do bookmakers offer?', a: 'Betfred: double odds on one winner, 10% bonus on all four winners. Coral: double odds on one winner. Paddy Power: treble odds on one winner. Always check the bookmaker\'s current Lucky 15 terms.' },
-      { q: 'What is an each-way Lucky 15?', a: 'An each-way Lucky 15 is 30 bets (15 win + 15 place), doubling your total outlay. For a £1 EW Lucky 15, the cost is £30.' },
-      { q: 'What happens if I have a non-runner in a Lucky 15?', a: 'The non-runner is treated as void and removed from each combination. A double becomes a single, a treble becomes a double, and the four-fold becomes a treble.' },
-    ]
-  },
-  {
     key: 'lucky-31', file: 'lucky-31.html',
     title: 'Lucky 31 Bet Calculator — 5 Selections, 31 Bets | BetCalc UK',
     metaDesc: 'Free Lucky 31 bet calculator. 5 singles, 10 doubles, 10 trebles, 5 four-folds, 1 five-fold = 31 bets. Instant returns with bookmaker bonus support.',

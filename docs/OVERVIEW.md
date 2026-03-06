@@ -191,6 +191,23 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-03-05 — Removed calculators/lucky-15.html and all links to it
+
+**What was done:**
+- Deleted `calculators/lucky-15.html`
+- Removed entry from nav.js dropdown (Popular group)
+- Removed bet-type link, table row link, and footer link from `index.html`
+- Removed inline body link and footer link from `bookmakers.html`
+- Removed bet-type grid link and footer link from all 28 other calculator pages (PowerShell mass replacement)
+- Removed all button and inline links from all 5 guide pages
+- Removed URL entry from `sitemap.xml`
+- Removed page definition from `build.js` and `generate-calc-pages.ps1` (including template links)
+- Removed page definition from `js/generate-pages.js`
+
+**Files affected:** `calculators/lucky-15.html` (deleted), `js/nav.js`, `index.html`, `bookmakers.html`, all `calculators/*.html`, all `guides/*.html`, `sitemap.xml`, `build.js`, `generate-calc-pages.ps1`, `js/generate-pages.js` (modified)
+
+---
+
 ### 2026-03-05 — Gate page rebuilt with Crazy Time stats embed
 
 **What was done:**

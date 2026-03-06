@@ -15,7 +15,6 @@
     {
       label: 'Popular',
       items: [
-        { label: 'Lucky 15',    href: 'calculators/lucky-15.html' },
         { label: 'Yankee',      href: 'calculators/yankee.html' },
         { label: 'Accumulator', href: 'calculators/accumulator.html' },
         { label: 'Trixie',      href: 'calculators/trixie.html' },
