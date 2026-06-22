@@ -2,7 +2,7 @@
 
 **URL:** https://lucky-15-bet-calculator.uk  
 **Stack:** Vanilla HTML / CSS / JavaScript (no framework, no build step required)  
-**Last updated:** 2026-03-04
+**Last updated:** 2026-06-22
 
 ---
 
@@ -188,6 +188,47 @@ Layout is flexbox/grid-based, fully responsive. No external CSS framework.
 ## Change Log
 
 All significant changes made to this project are recorded below. Most recent first.
+
+---
+
+### 2026-06-22 — SEO content rebuild: 38 articles + meta + JSON-LD + new guides
+
+**What was done:**
+- Integrated 38 long-form SEO articles from `text/` (one per URL in the project's `lucky15-betcalc_resurs_TZ.xlsx` ТЗ) into the live site
+- Updated `<title>`, `<meta description>`, `<h1>` and hero intro on all 36 existing pages (homepage, bookmakers, 29 calculators, 5 guides) using the canonical strings from the spreadsheet's `Title_Desc_H1` sheet (lengths 55-60 / 150-160 / 50-65)
+- Rendered each article's markdown body into HTML (paragraphs, h2/h3, tables, numbered lists, bold) and injected as a `.article-body` content-section between the calculator card and the bookmakers section on calculator pages, or inside the `<article>` element on guide pages
+- Rendered each article's `## Frequently Asked Questions` section as an accessible accordion (`.faq-list / .faq-item / .faq-question / .faq-answer`) using the existing site CSS and the existing accordion JS
+- Added JSON-LD on every page per the spreadsheet's `Schema_и_тех` sheet:
+  - Calculator pages: `WebApplication` (FinanceApplication, free) + `BreadcrumbList` + `FAQPage`
+  - Guide pages: `Article` (datePublished/dateModified 2026-06-22) + `BreadcrumbList` + `FAQPage`
+  - Homepage: `WebApplication` + `Organization` (with logo + description) + merged `FAQPage`
+  - Bookmakers: `FAQPage`
+- **Created two new guides** flagged "СОЗДАТЬ" in the ТЗ:
+  - `guides/what-is-a-patent.html` (1500 words, what-is-a-patent-bet article)
+  - `guides/what-is-a-trixie.html` (1200 words, what-is-a-trixie-bet article)
+  Both use the standard two-column guide template (article + sidebar with Quick Calculator + Related Guides cards).
+- Sanitised the article corpus: the source texts were generated for William Hill; replaced brand references with neutral language ("your chosen UK bookmaker", "our calculator", "Most UK bookmakers") so pages read as BetCalc UK's own editorial. William Hill entries on `bookmakers.html` and in the homepage `BOOKMAKERS` array (legitimate brand listings) were preserved.
+- Added `llms.txt` at site root listing site purpose + all calculator and guide pages — per the ТЗ's `AI_видимость_GEO` recommendation for LLM crawler discoverability
+- Updated `sitemap.xml`: bumped `lastmod` to 2026-06-22 for all 35 modified URLs and added entries for `what-is-a-patent.html` and `what-is-a-trixie.html` (now 37 URLs total, excluding `/about.html` which was untouched)
+- Updated `robots.txt`: disallow `build-content.py` and `/gate/` (page is `noindex`)
+
+**How it works:**
+- `build-content.py` (new, repo root) is the pipeline. It reads each article file in `text/` (format: `**Title:** ... **Description:** ... # H1 ... markdown body ... ## Frequently Asked Questions ... ### Q ... A`), runs sanitisation regex, renders markdown to HTML, then injects into the target HTML using `BEGIN-/END-` comment markers so the script is **idempotent** — re-running it produces the same output without duplicating content.
+- The script handles three page types differently:
+  - Calculator pages: strip any old article-body/FAQ sections between the calc card and bookmakers section, then re-insert wrapped in `<!-- BEGIN-ARTICLE-INJECT -->...<!-- END-ARTICLE-INJECT -->`
+  - Guide pages: replace everything inside `<article>...</article>`
+  - Homepage: replace the small built-in FAQ section + insert the new article body before `<!-- Bet Types Grid -->`, wrapped in `<!-- BEGIN-HOMEPAGE-ARTICLE -->...<!-- END-HOMEPAGE-ARTICLE -->`
+- All JSON-LD blocks are bracketed with `<!-- *-JSONLD-INJECT -->` markers so they can be cleanly re-generated on rebuild without piling up.
+
+**Files affected:**
+- `index.html`, `bookmakers.html` (modified — article body + meta + FAQ + JSON-LD)
+- all 29 `calculators/*.html` (modified)
+- all 5 existing `guides/*.html` (modified)
+- `guides/what-is-a-patent.html`, `guides/what-is-a-trixie.html` (new)
+- `llms.txt` (new)
+- `sitemap.xml` (modified — new lastmod, +2 guide URLs)
+- `robots.txt` (modified — disallow build script + `/gate/`)
+- `build-content.py` (new — content build pipeline)
 
 ---
 

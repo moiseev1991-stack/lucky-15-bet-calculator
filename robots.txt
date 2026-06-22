@@ -1,7 +1,9 @@
 User-agent: *
 Allow: /
 Disallow: /build.js
+Disallow: /build-content.py
 Disallow: /generate-calc-pages.ps1
 Disallow: /js/generate-pages.js
+Disallow: /gate/
 
 Sitemap: https://lucky-15-bet-calculator.uk/sitemap.xml

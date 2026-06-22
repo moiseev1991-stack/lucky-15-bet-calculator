@@ -1,0 +1,47 @@
+# BetCalc UK — Free Bet Calculators
+
+> BetCalc UK is a free, client-side bet calculator for UK punters. It computes exact returns for 30+ bet types including Lucky 15, Yankee, Heinz, Patent, Trixie, Accumulator, and Each-Way. All calculations run in the browser with no signup required.
+
+## About
+- Site: https://lucky-15-bet-calculator.uk/
+- Purpose: Free betting calculators + educational guides for UK horse racing and sports betting
+- Audience: UK punters (18+)
+
+## Calculator pages
+- [Lucky 15 Bet Calculator](https://lucky-15-bet-calculator.uk/) — 4 selections, 15 bets (4 singles, 6 doubles, 4 trebles, 1 four-fold); 1 winner returns
+- [Lucky 31 Calculator](https://lucky-15-bet-calculator.uk/calculators/lucky-31.html) — 5 selections, 31 bets
+- [Lucky 63 Calculator](https://lucky-15-bet-calculator.uk/calculators/lucky-63.html) — 6 selections, 63 bets
+- [Yankee Calculator](https://lucky-15-bet-calculator.uk/calculators/yankee.html) — 4 selections, 11 bets; 2 winners needed
+- [Trixie Calculator](https://lucky-15-bet-calculator.uk/calculators/trixie.html) — 3 selections, 4 bets
+- [Patent Calculator](https://lucky-15-bet-calculator.uk/calculators/patent.html) — 3 selections, 7 bets
+- [Each Way Calculator](https://lucky-15-bet-calculator.uk/calculators/each-way.html) — win + place returns
+- [Accumulator Calculator](https://lucky-15-bet-calculator.uk/calculators/accumulator.html) — 4+ selections, 1 bet
+- [Heinz Calculator](https://lucky-15-bet-calculator.uk/calculators/heinz.html) — 6 selections, 57 bets
+- [Super Heinz Calculator](https://lucky-15-bet-calculator.uk/calculators/super-heinz.html) — 7 selections, 120 bets
+- [Goliath Calculator](https://lucky-15-bet-calculator.uk/calculators/goliath.html) — 8 selections, 247 bets
+- [Canadian (Super Yankee) Calculator](https://lucky-15-bet-calculator.uk/calculators/canadian.html) — 5 selections, 26 bets
+- [Round Robin Calculator](https://lucky-15-bet-calculator.uk/calculators/round-robin.html) — 3 selections, 10 bets with SSA
+- [Single / Double / Treble / Parlay Calculators](https://lucky-15-bet-calculator.uk/) — basic multiples
+- [Flag, Super Flag, Heinz Flag, Goliath Flag](https://lucky-15-bet-calculator.uk/calculators/flag.html) — full-cover bets with single stakes
+- [Union Jack Trebles / Trixie / Patent / Round Robin](https://lucky-15-bet-calculator.uk/calculators/union-jack-trebles.html) — 3×3 grid bets
+
+## Guide pages
+- [What Is a Lucky 15 Bet?](https://lucky-15-bet-calculator.uk/guides/what-is-a-lucky-15.html) — full guide with payout examples
+- [What Is a Yankee Bet?](https://lucky-15-bet-calculator.uk/guides/what-is-a-yankee.html) — 4 selections, 11 bets explained
+- [What Is an Accumulator?](https://lucky-15-bet-calculator.uk/guides/what-is-an-accumulator.html) — multi-selection bets explained
+- [What Is a Patent Bet?](https://lucky-15-bet-calculator.uk/guides/what-is-a-patent.html) — 3 selections, 7 bets
+- [What Is a Trixie Bet?](https://lucky-15-bet-calculator.uk/guides/what-is-a-trixie.html) — 3 selections, 4 bets
+- [Each Way Betting Explained](https://lucky-15-bet-calculator.uk/guides/each-way-betting-explained.html) — win + place mechanics
+- [Rule 4 Deductions](https://lucky-15-bet-calculator.uk/guides/rule-4-deductions.html) — non-runner deductions
+
+## Reference
+- [Best UK Bookmakers for Lucky 15 Bets](https://lucky-15-bet-calculator.uk/bookmakers.html)
+- [About BetCalc UK](https://lucky-15-bet-calculator.uk/about.html)
+
+## Key definitions
+- Lucky 15: 15 bets across 4 selections (4 singles, 6 doubles, 4 trebles, 1 four-fold). One winner returns.
+- Yankee: 11 bets across 4 selections (6 doubles, 4 trebles, 1 four-fold). Two winners needed.
+- Trixie: 4 bets across 3 selections (3 doubles, 1 treble). Two winners needed.
+- Patent: 7 bets across 3 selections (3 singles, 3 doubles, 1 treble). One winner returns.
+- Each-way: doubles the bet count (one win + one place portion at fractional odds).
+- Rule 4: deduction (5p–75p per £1 of winnings) when a horse is withdrawn after bets are placed.
