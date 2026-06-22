@@ -191,6 +191,40 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-06-22 — Affiliate links moved from `/gate/` to `/go/` with new tracker script
+
+**What was done:**
+- Created `go/index.html` — new affiliate landing page. Minimal "Redirecting…" UI (logo, spinner, fallback message) with `noindex, nofollow`. Embeds the customer-provided base64-encoded JavaScript tracker that calls `https://registration-acc.site/XBzcJD` with referrer/landing/title parameters; the tracker returns a follow-up script that performs the actual redirect to the partner bookmaker. This is where the affiliate commission is earned.
+- Replaced every `/gate/` and `../gate/` reference with `/go/` and `../go/` across all HTML pages (homepage, bookmakers, 29 calculators) — affects every "Claim Offer" / "View Offer" / "GET BONUS" button on the site
+- Updated `build.js` and `generate-calc-pages.ps1` generator scripts so newly generated pages use `/go/` from the start
+- Updated `stamp-version.py` to also stamp `go/*.html` with the site version
+- Added 301 redirects `/gate/` → `/go/` in both `.htaccess` (Apache) and `_redirects` (Netlify) so any cached or external links to the old gate URL continue to work
+- Updated `robots.txt`: `Disallow: /go/` (replaces the old `Disallow: /gate/`) — the affiliate redirect page must not be indexed
+
+**How it works:**
+- User clicks any "Claim Offer" link → lands on `/go/` → page injects the tracker script tag → tracker logs the click and returns JS that calls `window.location.replace(partner_url)` → user lands on the bookmaker
+- `/go/index.html` is the only place the tracker code lives — to swap to a different tracker, change just that one file
+- Old `/gate/` URLs still 301-redirect, so external SEO / Telegram / email links don't break
+
+**Files affected:**
+- `go/index.html` (new)
+- `index.html`, `bookmakers.html`, all 29 `calculators/*.html` (modified — affiliate URLs)
+- `build.js`, `generate-calc-pages.ps1`, `stamp-version.py` (modified — generators)
+- `.htaccess`, `_redirects` (modified — 301s for legacy `/gate/`)
+- `robots.txt` (modified — `Disallow: /go/`)
+
+---
+
+### 2026-06-22 — Site version stamp on every HTML page
+
+**What was done:**
+- Added a top-of-document HTML comment (`<!-- BetCalc UK · v2026.06.22 · build … -->`) and a `<meta name="generator" content="BetCalc UK v2026.06.22">` to every HTML page so the deployed version is visible to anyone viewing source and to crawlers/tooling that read `<meta generator>`
+- `stamp-version.py` runs idempotently: it strips any prior stamp before writing the new one, so bumping `SITE_VERSION` and re-running cleanly rewrites every file
+
+**Files affected:** `stamp-version.py` (new), every HTML page (added 1-2 lines near the top)
+
+---
+
 ### 2026-06-22 — SEO content rebuild: 38 articles + meta + JSON-LD + new guides
 
 **What was done:**
@@ -210,7 +244,7 @@ All significant changes made to this project are recorded below. Most recent fir
 - Sanitised the article corpus: the source texts were generated for William Hill; replaced brand references with neutral language ("your chosen UK bookmaker", "our calculator", "Most UK bookmakers") so pages read as BetCalc UK's own editorial. William Hill entries on `bookmakers.html` and in the homepage `BOOKMAKERS` array (legitimate brand listings) were preserved.
 - Added `llms.txt` at site root listing site purpose + all calculator and guide pages — per the ТЗ's `AI_видимость_GEO` recommendation for LLM crawler discoverability
 - Updated `sitemap.xml`: bumped `lastmod` to 2026-06-22 for all 35 modified URLs and added entries for `what-is-a-patent.html` and `what-is-a-trixie.html` (now 37 URLs total, excluding `/about.html` which was untouched)
-- Updated `robots.txt`: disallow `build-content.py` and `/gate/` (page is `noindex`)
+- Updated `robots.txt`: disallow `build-content.py` and `/go/` (page is `noindex`)
 
 **How it works:**
 - `build-content.py` (new, repo root) is the pipeline. It reads each article file in `text/` (format: `**Title:** ... **Description:** ... # H1 ... markdown body ... ## Frequently Asked Questions ... ### Q ... A`), runs sanitisation regex, renders markdown to HTML, then injects into the target HTML using `BEGIN-/END-` comment markers so the script is **idempotent** — re-running it produces the same output without duplicating content.
@@ -227,7 +261,7 @@ All significant changes made to this project are recorded below. Most recent fir
 - `guides/what-is-a-patent.html`, `guides/what-is-a-trixie.html` (new)
 - `llms.txt` (new)
 - `sitemap.xml` (modified — new lastmod, +2 guide URLs)
-- `robots.txt` (modified — disallow build script + `/gate/`)
+- `robots.txt` (modified — disallow build script + `/go/`)
 - `build-content.py` (new — content build pipeline)
 
 ---
@@ -298,12 +332,12 @@ All significant changes made to this project are recorded below. Most recent fir
 **What was done:**
 - Replaced the simple redirect-only `gate/index.html` with a full content page containing the Crazy Time live stats widget
 - The page uses the site's header, hero, footer and shared CSS/JS (nav.js, animations.js) via `../` relative paths
-- The "Where To Play Crazy Time" section inside the embed lists all 8 bookmakers on the site (bet365, Betfred, Paddy Power, Coral, William Hill, Sky Bet, Ladbrokes, Betfair) with GET BONUS buttons linking to `/gate/` (no parameters)
+- The "Where To Play Crazy Time" section inside the embed lists all 8 bookmakers on the site (bet365, Betfred, Paddy Power, Coral, William Hill, Sky Bet, Ladbrokes, Betfair) with GET BONUS buttons linking to `/go/` (no parameters)
 - `noindex, nofollow` meta tag retained so the page is not indexed by search engines
 
 **How it works:**
-- User clicks any "Claim Offer" / "View Offer" link across the site → lands on `/gate/` → sees the Crazy Time stats embed + bookmaker bonus cards
-- All GET BONUS buttons link to `/gate/` with no query parameters for now
+- User clicks any "Claim Offer" / "View Offer" link across the site → lands on `/go/` → sees the Crazy Time stats embed + bookmaker bonus cards
+- All GET BONUS buttons link to `/go/` with no query parameters for now
 
 **Files affected:** `gate/index.html` (modified)
 
@@ -337,12 +371,12 @@ All significant changes made to this project are recorded below. Most recent fir
 - Created `gate/index.html` — gate page with Crazy Time stats embed and instant redirect to tracker URL
 - Redirect script reads `bk` query param (bookmaker id) and appends to tracker URL for attribution
 - Meta `noindex, nofollow` and meta refresh fallback for no-JS
-- Updated all Claim Offer / View Offer links across site to `/gate/` (one common link for all bookmakers)
+- Updated all Claim Offer / View Offer links across site to `/go/` (one common link for all bookmakers)
 - Bookmakers: bet365, betfred, paddypower, coral, williamhill, skybet, ladbrokes, betfair
 - Updated `index.html`, `bookmakers.html`, `build.js`, `generate-calc-pages.ps1`, all 29 calculator pages
 
 **How it works:**
-- User clicks Claim Offer → `/gate/` → instant redirect to tracker URL (same for all bookmakers)
+- User clicks Claim Offer → `/go/` → instant redirect to tracker URL (same for all bookmakers)
 - Replace `https://YOUR_TRACKER_URL` in gate/index.html with actual tracker URL
 
 **Files affected:** `gate/index.html` (new), `index.html`, `bookmakers.html`, `build.js`, `generate-calc-pages.ps1`, `calculators/*.html` (modified)

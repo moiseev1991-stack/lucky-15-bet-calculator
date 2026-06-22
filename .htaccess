@@ -1,5 +1,8 @@
 # Redirect /index.html to clean root URL
+# Redirect legacy /gate/ affiliate landing to /go/
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteRule ^index\.html$ / [R=301,L]
+    RewriteRule ^gate/?$ /go/ [R=301,L]
+    RewriteRule ^gate/(.*)$ /go/$1 [R=301,L]
 </IfModule>

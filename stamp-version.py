@@ -35,7 +35,7 @@ def stamp_file(path):
 
 def main():
     paths = []
-    for pattern in ['*.html', 'calculators/*.html', 'guides/*.html', 'gate/*.html']:
+    for pattern in ['*.html', 'calculators/*.html', 'guides/*.html', 'go/*.html']:
         for p in glob.glob(os.path.join(ROOT, pattern)):
             paths.append(p)
     for p in sorted(paths):
