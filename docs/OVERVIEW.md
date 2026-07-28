@@ -191,6 +191,24 @@ All significant changes made to this project are recorded below. Most recent fir
 
 ---
 
+### 2026-07-28 — Removed all BeGambleAware links and mentions site-wide
+
+**What was done:**
+- Removed every outbound `<a href="https://www.begambleaware.org">BeGambleAware.org</a>` link and all plain-text "BeGambleAware" mentions across the whole project (per client request). GamCare and GamStop references were kept intact.
+- Reworded surrounding responsible-gambling copy so the notices stay grammatical:
+  - Calculator card footer line: `18+ | Bet Responsibly | BeGambleAware.org` → `18+ | Bet Responsibly`
+  - Footer notices "…please visit BeGambleAware.org." → "…please seek help."; "…Visit BeGambleAware.org." → dropped, leaving "18+ only."
+  - Footer `responsible-gambling` div `18+ | BeGambleAware.org` → `18+`
+  - `gambling-logos` badge row: removed the `<span>BeGambleAware</span>` badge (18+/GamCare/GamStop remain)
+  - `bookmakers.html`: dropped the BeGambleAware entry from the Help list (GamCare stays), removed the "BeGambleAware." tail from a bet's `bm-terms`, and removed the "BeGambleAware is another resource…" sentence from the safer-gambling prose
+  - `about.html`: removed the "BeGambleAware.org — Free advice and support" list item
+- Updated the page generators so regenerated pages never reintroduce it: `build.js`, `generate-calc-pages.ps1` (calc-card line + footer reworded to "please seek help or call …"), `build-content.py` (guide/calc footer template)
+- Removed the same sentence from the source article `text/…best-betting-bookmakers-uk…` so a future `build-content.py` run stays clean
+
+**Files affected:** `index.html`, `about.html`, `bookmakers.html`, 29 `calculators/*.html`, 7 `guides/*.html`, `build.js`, `generate-calc-pages.ps1`, `build-content.py`, one `text/` source article (43 files total)
+
+---
+
 ### 2026-06-22 — Affiliate links moved from `/gate/` to `/go/` with new tracker script
 
 **What was done:**

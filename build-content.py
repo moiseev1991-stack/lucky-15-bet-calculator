@@ -627,7 +627,7 @@ GUIDE_TEMPLATE = '''<!DOCTYPE html>
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <div class="responsible-gambling">
-        <strong>Gamble Responsibly.</strong> 18+ only. Visit <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a>.
+        <strong>Gamble Responsibly.</strong> 18+ only.
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 BetCalc UK. All rights reserved.</span>

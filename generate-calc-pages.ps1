@@ -217,7 +217,7 @@ function Get-CalcPageHtml($p) {
 
           <div class="mt-16 d-flex justify-between align-center flex-wrap gap-8">
             <button type="button" class="btn btn-outline btn-sm" id="reset-btn">&#8635; Reset Calculator</button>
-            <span class="text-sm text-muted">18+ | Bet Responsibly | <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a></span>
+            <span class="text-sm text-muted">18+ | Bet Responsibly</span>
           </div>
         </div>
       </div>
@@ -268,8 +268,7 @@ function Get-CalcPageHtml($p) {
   <footer class="site-footer" role="contentinfo">
     <div class="container">
       <div class="responsible-gambling">
-        <strong>Gamble Responsibly.</strong> 18+ only. If you feel gambling is becoming a problem, please visit
-        <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a> or call <strong>0808 8020 133</strong>.
+        <strong>Gamble Responsibly.</strong> 18+ only. If you feel gambling is becoming a problem, please seek help or call <strong>0808 8020 133</strong>.
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 BetCalc UK. All rights reserved.</span>
