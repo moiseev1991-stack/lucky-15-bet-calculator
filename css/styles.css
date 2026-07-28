@@ -961,6 +961,8 @@ details[open] .bonuses-section summary::before,
 .bookmakers-section { margin-top: 44px; }
 .bookmakers-section h2 { margin-bottom: 6px; }
 .bookmakers-section .section-intro { color: var(--text-muted); margin-bottom: 20px; font-size: .95rem; }
+.bookmakers-section .editorial-pick { margin-top: 22px; padding: 14px 18px; background: var(--bg-alt); border-left: 3px solid var(--accent); border-radius: 8px; color: var(--text-muted); font-size: .95rem; line-height: 1.6; }
+.bookmakers-section .editorial-pick a { color: var(--primary-mid); font-weight: 600; }
 
 .bookmakers-grid {
   display: grid;
